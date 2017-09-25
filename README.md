@@ -1,39 +1,49 @@
-# Chapter 1
+# Chapter 3
 
-### Install Behat using Composer
+## Custom step definitions
 
+Using file `features/bootstrap/FeatureContext.php`
 
-Optional step
+Start with the following scenario:
 
-Set some defaults:
+```gherkin
 
-`composer init -n && composer config bin-dir bin`
+  Scenario: The homepage is loading
+    Given I am on the homepage
+    Then the homepage loads
 
-Install Behat
-
-`composer require --dev behat/mink behat/mink-extension behat/mink-goutte-driver`
-
-
-### Initialise a new Behat project
-
-Start with a simple behat.yml file
-
-> behat.yml
-
-```yml
-
-default:
-    suites:
-        default:
-            contexts:
-                - FeatureContext
 ```
 
+### Commands
 
-Initialise Behat
+```bash
 
-`bin/behat --init`
+# run behat
+bin/behat
 
-### Running Behat
+# show definition lists
+bin/behat -dl
 
-`bin/behat`
+# create custom definitions
+bin/behat --append-snippets
+
+```
+
+### Exercises
+
+> Making scenarios more readable
+
+* Transfer all previous scenarios to use custom definitions
+* Create file `features/events.feature`
+* Use CSS selectors to get specific events
+
+
+
+### Notes
+
+* Edit file `features/homepage.feature`
+* Add `base_url` to `behat.yml`
+* Add custom definitions
+
+
+

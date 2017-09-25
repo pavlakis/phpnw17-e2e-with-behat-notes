@@ -1,5 +1,10 @@
 default:
-    suites:
-        default:
-            contexts:
-                - FeatureContext
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+  
+  extensions:
+    Behat\MinkExtension:
+      base_url: "https://phpminds.org"
+      goutte: ~
