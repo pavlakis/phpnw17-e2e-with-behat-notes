@@ -14,6 +14,18 @@ Start with the following scenario:
 
 ```
 
+## Using CSS selectors
+
+```php
+
+// accessing the DOM
+$page = $this->getSession()->getPage();
+
+// get an element
+$element = $page->find('css', 'h3.p-name');
+
+```
+
 ### Commands
 
 ```bash
