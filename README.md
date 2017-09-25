@@ -1,39 +1,57 @@
-# Chapter 1
+# Chapter 2
 
-### Install Behat using Composer
+## Writing your first test feature file
+
+Create file `features/homepage.feature`
+
+```gherkin
+
+Feature: Homepage sanity checklist
+  In order to know a deployment has been successful
+  As a web user
+  I need to be able to check the homepage still works
+
+  Scenario: The homepage is loading
+    Given I go to "http://phpminds.org/"
+    Then the response status code should be 200
+
+  Scenario: I can confirm I am on the homepage
+    Given I go to "http://phpminds.org/"
+    Then I should see "meeting every 2nd Thursday of the month at 7pm in Nottingham"
 
 
-Optional step
-
-Set some defaults:
-
-`composer init -n && composer config bin-dir bin`
-
-Install Behat
-
-`composer require --dev behat/mink behat/mink-extension behat/mink-goutte-driver`
-
-
-### Initialise a new Behat project
-
-Start with a simple behat.yml file
-
-> behat.yml
-
-```yml
-
-default:
-    suites:
-        default:
-            contexts:
-                - FeatureContext
 ```
 
 
-Initialise Behat
+### Commands
 
-`bin/behat --init`
+```bash
 
-### Running Behat
+# run behat
+bin/behat
 
-`bin/behat`
+# show definition lists
+bin/behat -dl
+
+```
+
+### Exercises
+
+Use the standard definition lists to create more tests for the homepage
+
+Some examples to get you started:
+
+* I can see the navigation menu
+* I can load past talks
+* I can see the sponsors
+
+
+### Notes
+
+* Create file `features/homepage.feature`
+* Add Mink extension to `behat.yml`
+* Add Mink extension to `FeatureContext.php`
+* Using standard definition lists
+
+
+
