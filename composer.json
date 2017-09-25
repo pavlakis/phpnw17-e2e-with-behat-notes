@@ -1,0 +1,11 @@
+{
+    "require": {},
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "behat/mink": "^1.7",
+        "behat/mink-extension": "^2.2",
+        "behat/mink-goutte-driver": "^1.2"
+    }
+}
