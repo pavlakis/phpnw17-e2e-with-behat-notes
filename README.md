@@ -1,43 +1,45 @@
-# Chapter 4
+# Chapter 5
 
-## Browser testing with Selenium
+## Testing with Headless Chrome 
 
-### Java installation
+### Without Selenium server
 
-**Note** Java version 8 is required
-
-[Install Java](https://java.com/en/download/)
-
-For Mac, use the [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-
-### Install Selenium standalone server
+**Note** This is still experimental
 
 ```
-composer require --dev se/selenium-server-standalone behat/mink-selenium2-driver
+composer require --dev dmore/behat-chrome-extension
 ```
-
-[See documentation here](https://github.com/lmc-eu/steward/wiki/Selenium-server-&-browser-drivers)
-
-### Download Selenium drivers
-
-[http://www.seleniumhq.org/projects/webdriver/](http://www.seleniumhq.org/projects/webdriver/)
-
-* [Mozilla (Gecko) driver](https://github.com/mozilla/geckodriver/)
-* [Google Chrome driver](https://chromedriver.storage.googleapis.com/index.html?path=2.32/)
-
 
 ### behat.yml
 
 ```yml
 
   extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
     Behat\MinkExtension:
-      base_url: "https://phpminds.org"
-      goutte: ~
-      javascript_session: 'selenium2'
-      selenium2: ~
+      base_url: "https://phpminds.org/"
+      sessions:
+        default:
+          chrome:
+            api_url: "http://127.0.0.1:9222"
           
 
+```
+
+### With Selenium server
+
+```yml
+
+  extensions:
+    Behat\MinkExtension:
+      selenium2:
+          browser: chrome
+          wd_host: http://127.0.0.1:4444/wd/hub
+          capabilities:
+              chrome:
+                  switches:
+                      - "--headless"
+                      - "--disable-gpu"
 ```
 
 ### Commands
@@ -47,20 +49,20 @@ composer require --dev se/selenium-server-standalone behat/mink-selenium2-driver
 # run behat
 bin/behat
 
-# run selenium server for Firefox
-java  -Dwebdriver.gecko.driver=./drivers/mac/geckodriver -jar ./vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar -port 4444
-
-# run selenium server for Chrome
-java  -Dwebdriver.chrome.driver=./drivers/mac/chromedriver -jar ./vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar -port 4444
-
+# run specific profile
+bin/behat --profile chromeheadless
 
 ```
 
+### Exercises
+
+* Create profile to run the headless browser
+* 
 
 ### Notes
 
-* Edit `behat.yml` to add `selenium2` driver
-* Use `@javascript` tag to identify testing with selenium
+* Edit `behat.yml` to add `chrome extension` 
+
 
 
 

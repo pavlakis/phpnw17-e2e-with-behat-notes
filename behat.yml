@@ -12,7 +12,7 @@ default:
       selenium2: ~
 
 
-chrome:
+chromegui:
   extensions:
     Behat\MinkExtension:
       base_url: "https://phpminds.org"
@@ -21,4 +21,26 @@ chrome:
       selenium2:
           browser: "chrome"
           wd_host: "http://127.0.0.1:4444/wd/hub"
+
+chrome_headless:
+  extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+    Behat\MinkExtension:
+      sessions:
+        default:
+          chrome:
+            api_url: "http://127.0.0.1:9222"
+
+chrome_selenium_headless:
+  extensions:
+    Behat\MinkExtension:
+      selenium2:
+          browser: chrome
+          wd_host: http://127.0.0.1:4444/wd/hub
+          capabilities:
+              chrome:
+                  switches:
+                      - "--headless"
+                      - "--disable-gpu"
+
 
