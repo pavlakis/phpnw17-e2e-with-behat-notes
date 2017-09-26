@@ -8,3 +8,17 @@ default:
     Behat\MinkExtension:
       base_url: "https://phpminds.org"
       goutte: ~
+      javascript_session: 'selenium2'
+      selenium2: ~
+
+
+chrome:
+  extensions:
+    Behat\MinkExtension:
+      base_url: "https://phpminds.org"
+      javascript_session: 'selenium2'
+      browser_name: "chrome"
+      selenium2:
+          browser: "chrome"
+          wd_host: "http://127.0.0.1:4444/wd/hub"
+

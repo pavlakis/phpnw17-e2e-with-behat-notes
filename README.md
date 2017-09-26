@@ -1,28 +1,42 @@
-# Chapter 3
+# Chapter 4
 
-## Custom step definitions
+## Browser testing with Selenium
 
-Using file `features/bootstrap/FeatureContext.php`
+### Java installation
 
-Start with the following scenario:
+**Note** Java version 8 is required
 
-```gherkin
+[Install Java](https://java.com/en/download/)
 
-  Scenario: The homepage is loading
-    Given I am on the homepage
-    Then the homepage loads
+For Mac, use the [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+### Install Selenium standalone server
 
 ```
+composer require --dev se/selenium-server-standalone behat/mink-selenium2-driver
+```
 
-## Using CSS selectors
+[See documentation here](https://github.com/lmc-eu/steward/wiki/Selenium-server-&-browser-drivers)
 
-```php
+### Download Selenium drivers
 
-// accessing the DOM
-$page = $this->getSession()->getPage();
+[http://www.seleniumhq.org/projects/webdriver/](http://www.seleniumhq.org/projects/webdriver/)
 
-// get an element
-$element = $page->find('css', 'h3.p-name');
+* [Mozilla (Gecko) driver](https://github.com/mozilla/geckodriver/)
+* [Google Chrome driver](https://chromedriver.storage.googleapis.com/index.html?path=2.32/)
+
+
+### behat.yml
+
+```yml
+
+  extensions:
+    Behat\MinkExtension:
+      base_url: "https://phpminds.org"
+      goutte: ~
+      javascript_session: 'selenium2'
+      selenium2: ~
+          
 
 ```
 
@@ -33,29 +47,20 @@ $element = $page->find('css', 'h3.p-name');
 # run behat
 bin/behat
 
-# show definition lists
-bin/behat -dl
+# run selenium server for Firefox
+java  -Dwebdriver.gecko.driver=./drivers/mac/geckodriver -jar ./vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar -port 4444
 
-# create custom definitions
-bin/behat --append-snippets
+# run selenium server for Chrome
+java  -Dwebdriver.chrome.driver=./drivers/mac/chromedriver -jar ./vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar -port 4444
+
 
 ```
-
-### Exercises
-
-> Making scenarios more readable
-
-* Transfer all previous scenarios to use custom definitions
-* Create file `features/events.feature`
-* Use CSS selectors to get specific events
-
 
 
 ### Notes
 
-* Edit file `features/homepage.feature`
-* Add `base_url` to `behat.yml`
-* Add custom definitions
+* Edit `behat.yml` to add `selenium2` driver
+* Use `@javascript` tag to identify testing with selenium
 
 
 
